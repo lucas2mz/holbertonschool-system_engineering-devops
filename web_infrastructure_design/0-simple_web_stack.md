@@ -1,0 +1,43 @@
+Simple Web Stack Design
+
+1. A user opens their web browser and types www.foobar.com.
+2. The browser sends a DNS query to resolve www.foobar.com.
+3. The DNS server responds with the IP address 8.8.8.8 (A record).
+4. The browser sends an HTTP request to 8.8.8.8.
+5. The request reaches the server at 8.8.8.8, which hosts the web infrastructure.
+6. Nginx (the web server) receives the HTTP request.
+7. Nginx serves static files directly or forwards dynamic requests to the application server.
+8. The application server executes the business logic using the application code.
+9. If the app needs to retrieve or store data, it communicates with the MySQL database.
+10. The application server returns a response to Nginx.
+11. Nginx sends the final HTTP response back to the user's browser.
+12. The browser renders the website.
+
+Infrastructure Components:
+
+- Domain: foobar.com
+- DNS:
+  - Record Type: A
+  - www.foobar.com → 8.8.8.8
+- One server at IP address: 8.8.8.8
+  - Web server: Nginx
+  - Application server: (e.g., PHP-FPM, Node.js, Gunicorn, etc.)
+  - Application files: Your website’s source code
+  - Database: MySQL
+
+Component Roles:
+
+- **Server**: A physical or virtual machine that hosts all services required to run the website.
+- **Domain name**: Human-readable name that maps to the IP address of the server.
+- **DNS A record (www)**: Maps the subdomain `www` to the server’s IP address.
+- **Web server (Nginx)**: Handles HTTP requests, serves static content, and proxies dynamic content to the application server.
+- **Application server**: Runs the backend application logic and interacts with the database.
+- **Application files**: Source code of the website including frontend and backend logic.
+- **Database (MySQL)**: Stores and manages persistent data like users, posts, etc.
+- **Communication**: The server communicates with the user’s computer using HTTP/HTTPS over TCP/IP.
+
+Issues with this architecture:
+
+- **SPOF (Single Point of Failure)**: If the server fails, the entire website goes down.
+- **Downtime during maintenance**: Deployments or server restarts cause temporary downtime.
+- **Scalability limitations**: One server cannot efficiently handle high volumes of traffic.
