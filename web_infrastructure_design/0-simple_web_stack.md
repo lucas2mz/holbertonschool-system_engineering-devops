@@ -1,19 +1,12 @@
-Simple Web Stack Design
+# Simple Web Stack
 
-1. A user opens their web browser and types www.foobar.com.
-2. The browser sends a DNS query to resolve www.foobar.com.
-3. The DNS server responds with the IP address 8.8.8.8 (A record).
-4. The browser sends an HTTP request to 8.8.8.8.
-5. The request reaches the server at 8.8.8.8, which hosts the web infrastructure.
-6. Nginx (the web server) receives the HTTP request.
-7. Nginx serves static files directly or forwards dynamic requests to the application server.
-8. The application server executes the business logic using the application code.
-9. If the app needs to retrieve or store data, it communicates with the MySQL database.
-10. The application server returns a response to Nginx.
-11. Nginx sends the final HTTP response back to the user's browser.
-12. The browser renders the website.
+![Image of a simple web stack](0-simple_web_stack.png)
 
-Infrastructure Components:
+## Description
+
+This is a Simple Web Stack infrastructure that hosts a website that is reachable via `www.foobar.com`. The domain name is configured with a **www DNS record** pointing to the IP address `8.8.8.8` which corresponds to a single physical or virtual server. This server includes all necessary components to serve a dynamic website: a **web server (Nginx)**, an **application server**, the **application codebase**, and a **MySQL database**.
+
+## Infrastructure Components:
 
 - Domain: foobar.com
 - DNS:
@@ -22,10 +15,10 @@ Infrastructure Components:
 - One server at IP address: 8.8.8.8
   - Web server: Nginx
   - Application server: (e.g., PHP-FPM, Node.js, Gunicorn, etc.)
-  - Application files: Your website’s source code
+  - Application files: The website source code
   - Database: MySQL
 
-Component Roles:
+### Component Roles:
 
 - **Server**: A physical or virtual machine that hosts all services required to run the website.
 - **Domain name**: Human-readable name that maps to the IP address of the server.
@@ -36,7 +29,7 @@ Component Roles:
 - **Database (MySQL)**: Stores and manages persistent data like users, posts, etc.
 - **Communication**: The server communicates with the user’s computer using HTTP/HTTPS over TCP/IP.
 
-Issues with this architecture:
+### Issues with this architecture:
 
 - **SPOF (Single Point of Failure)**: If the server fails, the entire website goes down.
 - **Downtime during maintenance**: Deployments or server restarts cause temporary downtime.
